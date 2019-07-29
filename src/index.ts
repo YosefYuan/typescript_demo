@@ -1,30 +1,58 @@
-import { runInContext } from "vm";
+abstract class Animal {
+  eat() {
+    console.log("eat");
+  }
+  abstract sleep(): void;
+}
+// let animal = new Animal()
 
-class Dog {
+class Dog extends Animal {
   constructor(name: string) {
+    super();
     this.name = name;
   }
-  public name: string = "dog";
+  name: string;
   run() {}
-  private pri() {}
-  protected pro() {}
-  readonly legs: number = 4;
-  static food: string = "bones";
-}
-
-console.log(Dog.prototype);
-let dog = new Dog("ww");
-console.log(dog);
-console.log(Dog.food);
-// dog.pro()
-// dog.pri()
-
-class Husky extends Dog {
-  constructor(name: string, public color: string) {
-    super(name);
-    this.color = color;
-    // this.pri()
-    this.pro();
+  sleep() {
+    console.log("dog sleep");
   }
-  //   color: string;
 }
+
+let dog = new Dog("ww");
+dog.eat();
+// dog.sleep();
+
+class Cat extends Animal {
+  sleep() {
+    console.log("cat sleep");
+  }
+}
+let cat = new Cat();
+
+let animals: Animal[] = [dog, cat];
+animals.forEach(i => {
+  i.sleep();
+});
+
+class WorkFlow {
+  step1() {
+    return this;
+  }
+
+  step2() {
+    return this;
+  }
+}
+
+new WorkFlow().step1().step2();
+
+class MyFlow extends WorkFlow {
+  next() {
+    return this;
+  }
+}
+
+new MyFlow()
+  .next()
+  .step1()
+  .step2();
