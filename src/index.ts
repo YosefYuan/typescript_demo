@@ -1,43 +1,16 @@
-interface Human {
-  name: string;
-  eat(): void;
+function log<T>(value: T): T {
+  console.log(value);
+  return value;
 }
 
-class Asian implements Human {
-  constructor(name: string) {
-    this.name = name;
-  }
-  name: string;
-  eat() {}
-  sleep() {}
+log<string[]>(["a", "b"]);
+log(["a", "b"]);
+
+// type Log = <T>(value: T) => T;
+// let myLog: Log = log;
+
+interface Log<T = string> {
+  <T>(value: T): T;
 }
-
-interface Man extends Human {
-  run(): void;
-}
-
-interface Child {
-  cry(): void;
-}
-
-interface Boy extends Man, Child {}
-
-let boy: Boy = {
-  name: "",
-  run() {},
-  eat() {},
-  cry() {}
-};
-
-class Auto {
-  state = 1;
-  // private state2 = 0;
-}
-
-interface AutoInterface extends Auto {}
-class C implements AutoInterface {
-  state = 1;
-  // private state2 = 6;
-}
-
-class Bus extends Auto implements AutoInterface {}
+let myLog: Log = log;
+myLog("1");
