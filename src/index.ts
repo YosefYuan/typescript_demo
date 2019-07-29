@@ -1,20 +1,30 @@
-function add7(x: number, ...rest: number[]) {
-  return x + rest.reduce((prev, cur) => prev + cur);
+import { runInContext } from "vm";
+
+class Dog {
+  constructor(name: string) {
+    this.name = name;
+  }
+  public name: string = "dog";
+  run() {}
+  private pri() {}
+  protected pro() {}
+  readonly legs: number = 4;
+  static food: string = "bones";
 }
 
-console.log(add7(1, 2, 3, 4, 5));
+console.log(Dog.prototype);
+let dog = new Dog("ww");
+console.log(dog);
+console.log(Dog.food);
+// dog.pro()
+// dog.pri()
 
-function add8(...rest: number[]): number;
-function add8(...rest: string[]): string;
-function add8(...rest: any[]) {
-  let first = rest[0];
-  if (typeof first === "string") {
-    return rest.join("");
+class Husky extends Dog {
+  constructor(name: string, public color: string) {
+    super(name);
+    this.color = color;
+    // this.pri()
+    this.pro();
   }
-  if (typeof first === "number") {
-    return rest.reduce((pre, cur) => pre + cur);
-  }
+  //   color: string;
 }
-
-console.log(add8(1, 2, 3));
-console.log(add8("a", "b", "c"));
