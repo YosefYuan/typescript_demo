@@ -1,58 +1,43 @@
-abstract class Animal {
-  eat() {
-    console.log("eat");
-  }
-  abstract sleep(): void;
+interface Human {
+  name: string;
+  eat(): void;
 }
-// let animal = new Animal()
 
-class Dog extends Animal {
+class Asian implements Human {
   constructor(name: string) {
-    super();
     this.name = name;
   }
   name: string;
-  run() {}
-  sleep() {
-    console.log("dog sleep");
-  }
+  eat() {}
+  sleep() {}
 }
 
-let dog = new Dog("ww");
-dog.eat();
-// dog.sleep();
-
-class Cat extends Animal {
-  sleep() {
-    console.log("cat sleep");
-  }
-}
-let cat = new Cat();
-
-let animals: Animal[] = [dog, cat];
-animals.forEach(i => {
-  i.sleep();
-});
-
-class WorkFlow {
-  step1() {
-    return this;
-  }
-
-  step2() {
-    return this;
-  }
+interface Man extends Human {
+  run(): void;
 }
 
-new WorkFlow().step1().step2();
-
-class MyFlow extends WorkFlow {
-  next() {
-    return this;
-  }
+interface Child {
+  cry(): void;
 }
 
-new MyFlow()
-  .next()
-  .step1()
-  .step2();
+interface Boy extends Man, Child {}
+
+let boy: Boy = {
+  name: "",
+  run() {},
+  eat() {},
+  cry() {}
+};
+
+class Auto {
+  state = 1;
+  // private state2 = 0;
+}
+
+interface AutoInterface extends Auto {}
+class C implements AutoInterface {
+  state = 1;
+  // private state2 = 6;
+}
+
+class Bus extends Auto implements AutoInterface {}
