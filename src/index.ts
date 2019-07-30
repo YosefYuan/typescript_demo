@@ -1,25 +1,17 @@
-class Log<T> {
-  run(value: T) {
-    console.log(value);
-    return value;
-  }
+let a = 1;
+let b = [1, null];
+
+let c = (x = 1) => x + 1;
+
+window.onkeydown = event => {
+  // console.log(event.button)
+};
+
+interface Foo {
+  bar: number;
 }
-
-let log1 = new Log<number>();
-
-log1.run(1);
-
-let log2 = new Log();
-log2.run({ a: 1 });
-log2.run("1");
-
-interface Length {
-  length: number;
-}
-function log<T extends Length>(value: T) {
-  console.log(value, value.length);
-  return value;
-}
-log([1]);
-log("123");
-log({ length: 1 });
+// let foo = {} as Foo;
+let foo: Foo = {
+  bar: 1
+};
+// foo.bar = 1;
